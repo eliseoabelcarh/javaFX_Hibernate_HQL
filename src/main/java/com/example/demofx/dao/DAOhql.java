@@ -1,5 +1,6 @@
-package com.example.demofx;
+package com.example.demofx.dao;
 
+import com.example.demofx.models.UsersEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;

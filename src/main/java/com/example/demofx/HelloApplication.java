@@ -1,5 +1,6 @@
 package com.example.demofx;
 
+import com.example.demofx.dao.DAOhql;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;

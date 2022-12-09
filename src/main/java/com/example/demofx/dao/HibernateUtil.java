@@ -1,4 +1,4 @@
-package com.example.demofx;
+package com.example.demofx.dao;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

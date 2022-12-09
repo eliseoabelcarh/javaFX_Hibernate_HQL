@@ -1,4 +1,4 @@
-package com.example.demofx;
+package com.example.demofx.models;
 
 import jakarta.persistence.*;
 

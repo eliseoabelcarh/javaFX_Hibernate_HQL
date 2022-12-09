@@ -1,5 +1,6 @@
-package com.example.demofx;
+package com.example.demofx.controllers;
 
+import com.example.demofx.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -55,7 +56,7 @@ public class HomeController implements Initializable {
 
         try {
 
-            Node Overview = FXMLLoader.load(getClass().getResource("Overview.fxml"));
+            Node Overview = FXMLLoader.load(HelloApplication.class.getResource("Overview.fxml"));
             pnlOverview.getChildren().add(Overview);
 
         } catch (IOException e) {

@@ -18,7 +18,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0"
             prefWidth="1050.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/9.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.demofx.HomeController"
+            fx:controller="com.example.demofx.controllers.HomeController"
 >
     <children>
         <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #05071F;"

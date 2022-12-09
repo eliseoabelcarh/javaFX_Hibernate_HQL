@@ -14,7 +14,7 @@
     <property name="hibernate.show_sql">true</property>
 
     <mapping resource="UsersEntity.xml"/>
-    <mapping class="com.example.demofx.UsersEntity"/>
+    <mapping class="com.example.demofx.models.UsersEntity"/>
 
     <!-- DB schema will be updated if needed -->
     <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->

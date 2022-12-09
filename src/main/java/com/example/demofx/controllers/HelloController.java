@@ -1,12 +1,13 @@
-package com.example.demofx;
+package com.example.demofx.controllers;
 
+import com.example.demofx.HelloApplication;
+import com.example.demofx.dao.DAOhql;
+import com.example.demofx.models.UsersEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class HelloController {
     @FXML

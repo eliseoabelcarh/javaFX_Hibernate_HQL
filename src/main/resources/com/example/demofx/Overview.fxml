@@ -12,7 +12,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.Pane?>
 <Pane fx:id="OverviewFx"
-      fx:controller="com.example.demofx.OverviewController"
+      fx:controller="com.example.demofx.controllers.OverviewController"
       maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.73" prefHeight="53.0" prefWidth="695.0" style="-fx-background-color: #02030A; -fx-background-radius: 5; -fx-background-insets: 0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <TextField layoutX="590.0" layoutY="47.0" prefHeight="27.0" prefWidth="183.0"
                promptText="search"
