@@ -1,0 +1,9 @@
+.root {
+    -fx-background-color: #000000;
+}
+.label {
+    -fx-text-fill: #ffffff;
+}
+#welcomeText {
+    -fx-text-fill: red;
+}
