@@ -11,30 +11,29 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class HelloApplication extends Application {
+public class MainApplication extends Application {
 
     private static Stage primaryStage;
-
 
 
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        String css = this.getClass().getResource("appStyles.css").toExternalForm();
+        String css = Objects.requireNonNull(this.getClass().getResource("styles/appStyles.css")).toExternalForm();
         scene.getStylesheets().add(css);
-        stage.setTitle("Hello!");
+        stage.setTitle("Login User!");
         stage.setScene(scene);
         stage.show();
 
     }
-
     public static void changeScene(String fxml) throws IOException {
         //UI resource: https://github.com/k33ptoo/RestaurantMgtSampleUI
-        Parent pane = FXMLLoader.load(HelloApplication.class.getResource(fxml));
+        Parent pane = FXMLLoader.load(Objects.requireNonNull(MainApplication.class.getResource(fxml)));
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
         //allow drag
@@ -62,12 +61,6 @@ public class HelloApplication extends Application {
             stage.setX(event.getScreenX() - x.get());
             stage.setY(event.getScreenY() - y.get());
         });
-    }
-
-    public static int createRandomNumber() {
-        int MIN = 1;
-        int MAX = 999999;
-        return (int) ((Math.random() * (MAX - MIN)) + MIN);
     }
 
     public static void main(String[] args) {

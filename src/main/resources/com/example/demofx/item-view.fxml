@@ -40,7 +40,7 @@
         </Label>
         <Button mnemonicParsing="false" prefHeight="10.0" prefWidth="60.0"
                 style="-fx-border-color: #2A73FF; -fx-border-radius: 20; -fx-background-color: transparent;"
-                stylesheets="@styles.css" text="active">
+                stylesheets="@styles/homeStyles.css" text="active">
             <HBox.margin>
                 <Insets/>
             </HBox.margin>

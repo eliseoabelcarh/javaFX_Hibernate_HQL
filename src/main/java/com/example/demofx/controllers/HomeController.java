@@ -1,22 +1,23 @@
 package com.example.demofx.controllers;
 
-import com.example.demofx.HelloApplication;
+import com.example.demofx.MainApplication;
+import com.example.demofx.global.UserHolder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
-    @FXML
-    private VBox pnItems = null;
+
     @FXML
     private Button btnOverview;
 
@@ -50,22 +51,19 @@ public class HomeController implements Initializable {
     @FXML
     private Pane pnlMenus;
 
+    @FXML
+    private Label currentUsername;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
         try {
-
-            Node Overview = FXMLLoader.load(HelloApplication.class.getResource("Overview.fxml"));
+            Node Overview = FXMLLoader.load(Objects.requireNonNull(MainApplication.class.getResource("overview-view.fxml")));
             pnlOverview.getChildren().add(Overview);
-
+            currentUsername.setText(UserHolder.getInstance().getUsername());
         } catch (IOException e) {
-            System.out.println("Error---------------------: " + e.getMessage());
             throw new RuntimeException(e);
         }
-
     }
-
 
     public void handleClicks(ActionEvent actionEvent) {
         if (actionEvent.getSource() == btnOverview) {

@@ -1,6 +1,6 @@
 package com.example.demofx.controllers;
 
-import com.example.demofx.HelloApplication;
+import com.example.demofx.MainApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class OverviewController implements Initializable {
@@ -24,7 +25,7 @@ public class OverviewController implements Initializable {
         for (int i = 0; i < nodes.length; i++) {
             final int j = i;
             try {
-                nodes[i] = FXMLLoader.load(HelloApplication.class.getResource("Item.fxml"));
+                nodes[i] = FXMLLoader.load(Objects.requireNonNull(MainApplication.class.getResource("item-view.fxml")));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
