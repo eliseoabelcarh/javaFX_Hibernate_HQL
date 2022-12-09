@@ -18,10 +18,23 @@ public class DAOhql {
         Query query = session.createQuery("from UsersEntity where id= :id");
         query.setParameter("id", _id);
         UsersEntity user = (UsersEntity) query.uniqueResult();
-        System.out.println("Id: " + user.getId());
-        System.out.println("Name: " + user.getNombre());
         session.getTransaction().commit();
         System.out.println("Transaction committed");
+        session.close();
+        return user;
+    }
+
+    public static UsersEntity getUserByUsername(String _username) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        System.out.println("Transaction started");
+        Query query = session.createQuery("from UsersEntity where username= :username");
+        query.setParameter("username", _username);
+        UsersEntity user = (UsersEntity) query.uniqueResult();
+        session.getTransaction().commit();
+        System.out.println("Transaction -----userfounded-----");
+        System.out.println(user);
+        System.out.println("------------Transaction committed");
         session.close();
         return user;
     }

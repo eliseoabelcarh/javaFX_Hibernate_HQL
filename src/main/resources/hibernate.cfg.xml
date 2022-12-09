@@ -12,7 +12,8 @@
 
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.show_sql">true</property>
-    <mapping resource="UsersEntity.hbm.xml"/>
+
+    <mapping resource="UsersEntity.xml"/>
     <mapping class="com.example.demofx.UsersEntity"/>
 
     <!-- DB schema will be updated if needed -->

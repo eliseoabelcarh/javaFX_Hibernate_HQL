@@ -7,17 +7,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class HelloApplication extends Application {
 
     private static Stage primaryStage;
 
-    private static double x;
-    private static double y;
+
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -52,13 +51,15 @@ public class HelloApplication extends Application {
     }
 
     private static void allowDrag(Parent pane, Stage stage) {
+        AtomicReference<Double> x = new AtomicReference<>((double) 0);
+        AtomicReference<Double> y = new AtomicReference<>((double) 0);
         pane.setOnMousePressed(event -> {
-            x = event.getSceneX();
-            y = event.getSceneY();
+            x.set(event.getSceneX());
+            y.set(event.getSceneY());
         });
         pane.setOnMouseDragged(event -> {
-            stage.setX(event.getScreenX() - x);
-            stage.setY(event.getScreenY() - y);
+            stage.setX(event.getScreenX() - x.get());
+            stage.setY(event.getScreenY() - y.get());
         });
     }
 
@@ -71,25 +72,43 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
 
 
-        DAOhql dao = DAOhql.getInstance();
-        UsersEntity user = dao.getUserById(123);
-        System.out.println("finded Id: " + user.getId());
-        System.out.println("finded Name: " + user.getNombre());
-
-        UsersEntity newUser = new UsersEntity();
-        newUser.setNombre("New User".concat(String.valueOf(createRandomNumber())));
-        dao.addNewUser(newUser);
-        System.out.println("New User Name: " + newUser.getNombre());
-
-
-        List<UsersEntity> usersList = dao.getAllUsers();
-        for (UsersEntity user1 : usersList) {
-            System.out.println("Id: " + user1.getId());
-            System.out.println("Name: " + user1.getNombre());
-        }
-
-
-        dao.close();
+//        DAOhql dao = DAOhql.getInstance();
+//        UsersEntity user = dao.getUserById(123);
+//        if(user != null) {
+//            System.out.println("finded Id: " + user.getId());
+//            System.out.println("finded Name: " + user.getUsername());
+//        }else{
+//            System.out.println("user not finded");
+//        }
+//
+//
+//
+//
+//        List<UsersEntity> usersList = dao.getAllUsers();
+//        if(usersList.size() > 0) {
+//            for (UsersEntity userEntity : usersList) {
+//                System.out.println("User Name: " + userEntity.getUsername());
+//            }
+//        }else {
+//            System.out.println("No users found");
+//        }
+//
+//        UsersEntity newUser = new UsersEntity();
+//        newUser.setUsername("User".concat(String.valueOf(createRandomNumber())));
+//        newUser.setPassword("123456");
+//        dao.addNewUser(newUser);
+//        System.out.println("New User Name: " + newUser.getUsername());
+//
+//
+//
+//        dao.close();
         launch();
     }
+
+    @Override
+    public void stop() {
+        System.out.println("Stage and Dao is closing");
+        DAOhql.getInstance().close();
+    }
+
 }

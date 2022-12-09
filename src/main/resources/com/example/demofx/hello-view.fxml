@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.demofx.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demofx.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <Label alignment="TOP_CENTER" text="Login">
+      <font>
+         <Font name="Calibri Bold" size="18.0" />
+      </font>
+   </Label>
+   <TextField fx:id="inputUsername" promptText="username" />
+   <TextField fx:id="inputPassword" promptText="password" />
+
+    <Label fx:id="errorText" />
+    <Button alignment="CENTER" contentDisplay="CENTER" onAction="#onHelloButtonClick" prefHeight="31.0" prefWidth="105.0" style="-fx-background-color: #000000; -fx-text-fill: #ffffff;" text="LOGIN" textAlignment="CENTER">
+      <font>
+         <Font size="15.0" />
+      </font>
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor></Button>
 </VBox>

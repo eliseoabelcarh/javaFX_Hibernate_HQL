@@ -1,7 +1,6 @@
 package com.example.demofx;
 
-import javax.persistence.*;
-
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users", schema = "demousers")
@@ -11,11 +10,15 @@ public class UsersEntity {
     @Column(name = "id", nullable = false)
     private int id;
     @Basic
-    @Column(name = "nombre", nullable = true, length = 255)
-    private String nombre;
+    @Column(name = "username", nullable = true, length = 255)
+    private String username;
+    @Basic
+    @Column(name = "password", nullable = true, length = 255)
+    private String password;
 
     public UsersEntity() {
     }
+
     public int getId() {
         return id;
     }
@@ -24,11 +27,19 @@ public class UsersEntity {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
