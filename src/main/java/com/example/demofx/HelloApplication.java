@@ -2,14 +2,27 @@ package com.example.demofx;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.io.IOException;
 import java.util.List;
 
 public class HelloApplication extends Application {
+
+    private static Stage primaryStage;
+
+    private static double x;
+    private static double y;
     @Override
     public void start(Stage stage) throws IOException {
+
+        this.primaryStage = stage;
+
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         String css = this.getClass().getResource("appStyles.css").toExternalForm();
@@ -17,7 +30,30 @@ public class HelloApplication extends Application {
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
+
     }
+
+    public static void changeScene(String fxml) throws IOException {
+        //UI resource: https://github.com/k33ptoo/RestaurantMgtSampleUI
+        Parent pane = FXMLLoader.load(HelloApplication.class.getResource(fxml));
+        Scene scene = new Scene( pane );
+        primaryStage.setScene(scene);
+        //drag it here
+        pane.setOnMousePressed(event -> {
+            x = event.getSceneX();
+            y = event.getSceneY();
+        });
+        pane.setOnMouseDragged(event -> {
+            primaryStage.setX(event.getScreenX() - x);
+            primaryStage.setY(event.getScreenY() - y);
+        });
+        //Force Center the stage
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        primaryStage.setX((primScreenBounds.getWidth() - primaryStage.getWidth()) / 2);
+        primaryStage.setY((primScreenBounds.getHeight() - primaryStage.getHeight()) / 2);
+    }
+
+
 
     public static int createRandomNumber() {
         int MIN = 1;
