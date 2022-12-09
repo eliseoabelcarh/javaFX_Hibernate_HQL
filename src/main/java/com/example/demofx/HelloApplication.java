@@ -18,11 +18,10 @@ public class HelloApplication extends Application {
 
     private static double x;
     private static double y;
+
     @Override
     public void start(Stage stage) throws IOException {
-
-        this.primaryStage = stage;
-
+        primaryStage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         String css = this.getClass().getResource("appStyles.css").toExternalForm();
@@ -36,24 +35,32 @@ public class HelloApplication extends Application {
     public static void changeScene(String fxml) throws IOException {
         //UI resource: https://github.com/k33ptoo/RestaurantMgtSampleUI
         Parent pane = FXMLLoader.load(HelloApplication.class.getResource(fxml));
-        Scene scene = new Scene( pane );
+        Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
-        //drag it here
+        //allow drag
+        allowDrag(pane, primaryStage);
+        //Force Center the stage
+        centerStage(primaryStage);
+    }
+
+    private static void centerStage(Stage stage) {
+        List<Screen> screensForRectangle = Screen.getScreensForRectangle(stage.getX(), stage.getY(), stage.getWidth(), stage.getHeight());
+        Screen screen = screensForRectangle.isEmpty() ? Screen.getPrimary() : screensForRectangle.get(0);
+        Rectangle2D bounds = screen.getVisualBounds();
+        stage.setX(bounds.getMinX() + (bounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY(bounds.getMinY() + (bounds.getHeight() - stage.getHeight()) / 2);
+    }
+
+    private static void allowDrag(Parent pane, Stage stage) {
         pane.setOnMousePressed(event -> {
             x = event.getSceneX();
             y = event.getSceneY();
         });
         pane.setOnMouseDragged(event -> {
-            primaryStage.setX(event.getScreenX() - x);
-            primaryStage.setY(event.getScreenY() - y);
+            stage.setX(event.getScreenX() - x);
+            stage.setY(event.getScreenY() - y);
         });
-        //Force Center the stage
-        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        primaryStage.setX((primScreenBounds.getWidth() - primaryStage.getWidth()) / 2);
-        primaryStage.setY((primScreenBounds.getHeight() - primaryStage.getHeight()) / 2);
     }
-
-
 
     public static int createRandomNumber() {
         int MIN = 1;
