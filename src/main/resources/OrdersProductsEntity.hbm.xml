@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.example.demofx.models.OrdersProductsEntity" table="orders_products" schema="demousers">
+        <composite-id name="id" class="com.example.demofx.models.OrdersProductsEntityPK">
+            <key-property name="orderId" type="int">
+                <column name="order_id" sql-type="int"/>
+            </key-property>
+            <key-property name="productId" type="int">
+                <column name="product_id" sql-type="int" />
+            </key-property>
+            <key-property name="uniqueId">
+                <column name="unique_id" sql-type="varchar(255)" not-null="true"/>
+            </key-property>
+        </composite-id>
+
+
+
+
+        <property name="qty">
+            <column name="qty" sql-type="int"/>
+        </property>
+        <property name="price">
+            <column name="price" sql-type="double" precision="-1"/>
+        </property>
+        <many-to-one name="ordersByOrderId" class="com.example.demofx.models.OrdersEntity" insert="false" update="false">
+            <column name="order_id"/>
+        </many-to-one>
+        <many-to-one name="productsByProductId" class="com.example.demofx.models.ProductsEntity"  insert="false" update="false">
+            <column name="product_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

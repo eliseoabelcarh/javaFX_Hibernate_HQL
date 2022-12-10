@@ -8,7 +8,7 @@ public class UsersEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    private Integer id;
     @Basic
     @Column(name = "username", nullable = true, length = 255)
     private String username;
@@ -19,11 +19,17 @@ public class UsersEntity {
     public UsersEntity() {
     }
 
-    public int getId() {
+    public UsersEntity(Integer id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

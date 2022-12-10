@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.example.demofx.models.ProductsEntity" table="products" schema="demousers">
+        <id name="id">
+            <column name="id" sql-type="int"/>
+        </id>
+        <property name="productName">
+            <column name="product_name" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="productSku">
+            <column name="product_sku" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="productEpc">
+            <column name="product_epc" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="productPrice">
+            <column name="product_price" sql-type="double" precision="-1"/>
+        </property>
+        <set name="ordersProductsById" inverse="true">
+            <key>
+                <column name="product_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.example.demofx.models.OrdersProductsEntity"/>
+        </set>
+    </class>
+</hibernate-mapping>

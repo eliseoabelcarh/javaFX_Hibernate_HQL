@@ -12,11 +12,17 @@
 
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.show_sql">true</property>
-
-    <mapping resource="UsersEntity.xml"/>
+    <property name="hibernate.hbm2ddl.auto">create</property>
+    <mapping class="com.example.demofx.models.OrdersEntity"/>
+    <mapping resource="OrdersEntity.hbm.xml"/>
+    <mapping resource="OrdersProductsEntity.hbm.xml"/>
+    <mapping class="com.example.demofx.models.OrdersProductsEntity"/>
+    <mapping class="com.example.demofx.models.ProductsEntity"/>
+    <mapping resource="ProductsEntity.hbm.xml"/>
     <mapping class="com.example.demofx.models.UsersEntity"/>
+    <mapping resource="UsersEntity.hbm.xml"/>
 
     <!-- DB schema will be updated if needed -->
-    <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+
   </session-factory>
 </hibernate-configuration>
