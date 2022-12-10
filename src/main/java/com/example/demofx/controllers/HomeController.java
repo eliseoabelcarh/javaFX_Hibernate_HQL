@@ -57,12 +57,18 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+
+
+            Node Products = FXMLLoader.load(Objects.requireNonNull(MainApplication.class.getResource("products-view.fxml")));
+            pnlOrders.getChildren().add(Products);
+
             Node Overview = FXMLLoader.load(Objects.requireNonNull(MainApplication.class.getResource("overview-view.fxml")));
             pnlOverview.getChildren().add(Overview);
             currentUsername.setText(UserHolder.getInstance().getUsername());
 
-            Node Products = FXMLLoader.load(Objects.requireNonNull(MainApplication.class.getResource("products-view.fxml")));
-            pnlOrders.getChildren().add(Products);
+            // make it visible at the beginning
+            pnlOverview.setStyle("-fx-background-color : #02030A");
+            pnlOverview.toFront();
 
 
         } catch (IOException e) {
