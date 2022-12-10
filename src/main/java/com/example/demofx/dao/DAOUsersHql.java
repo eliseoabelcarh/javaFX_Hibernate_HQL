@@ -7,8 +7,8 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class DAOhql {
-    private static DAOhql instance = null;
+public class DAOUsersHql {
+    private static DAOUsersHql instance = null;
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     private static Session session;
 
@@ -69,12 +69,12 @@ public class DAOhql {
         System.out.println("Session Factory closed");
     }
 
-    private DAOhql() {
+    private DAOUsersHql() {
     }
 
-    public static DAOhql getInstance() {
+    public static DAOUsersHql getInstance() {
         if (instance == null) {
-            instance = new DAOhql();
+            instance = new DAOUsersHql();
         }
         return instance;
     }

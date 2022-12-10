@@ -1,6 +1,9 @@
 package com.example.demofx;
 
-import com.example.demofx.dao.DAOhql;
+import com.example.demofx.dao.*;
+import com.example.demofx.models.OrdersEntity;
+import com.example.demofx.models.OrdersProductsEntity;
+import com.example.demofx.models.ProductsEntity;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -63,10 +66,15 @@ public class MainApplication extends Application {
         });
     }
 
+    public static int createRandomNumber() {
+        int min = 1;
+        int max = 9999999;
+        return (int) ((Math.random() * (max - min)) + min);
+    }
     public static void main(String[] args) {
 
 
-//        DAOhql dao = DAOhql.getInstance();
+//        DAOUsersHql dao = DAOUsersHql.getInstance();
 //        UsersEntity user = dao.getUserById(123);
 //        if(user != null) {
 //            System.out.println("finded Id: " + user.getId());
@@ -96,13 +104,39 @@ public class MainApplication extends Application {
 //
 //
 //        dao.close();
+
+
+
+        ProductsEntity  product = new ProductsEntity();
+        product.setId(createRandomNumber());
+        product.setProductName("Product".concat(String.valueOf(createRandomNumber())));
+        product.setProductSku(String.valueOf(createRandomNumber()));
+        product.setProductEpc(String.valueOf(createRandomNumber()));
+        product.setProductPrice(150.0);
+
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        DAOProductsHql daoProductsHql = daoFactory.getProductsDao();
+        daoProductsHql.addNewProduct(product);
+
+        OrdersEntity order = new OrdersEntity();
+        order.setId(createRandomNumber());
+        DAOOrdersHql daoOrdersHql = daoFactory.getOrdersDao();
+        daoOrdersHql.addNewOrder(order);
+
+        OrdersProductsEntity orderProduct = new OrdersProductsEntity(order, product,2);
+        DAOOrdersProductsHql daoOrdersProductsHql = daoFactory.getOrdersProductsDao();
+        daoOrdersProductsHql.addNewOrderProduct(orderProduct);
+
         launch();
     }
 
     @Override
     public void stop() {
         System.out.println("Stage and Dao is closing");
-        DAOhql.getInstance().close();
+        DAOUsersHql.getInstance().close();
+        DAOProductsHql.getInstance().close();
+        DAOOrdersHql.getInstance().close();
+        DAOOrdersProductsHql.getInstance().close();
     }
 
 }

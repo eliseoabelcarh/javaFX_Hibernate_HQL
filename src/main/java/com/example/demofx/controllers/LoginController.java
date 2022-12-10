@@ -1,7 +1,8 @@
 package com.example.demofx.controllers;
 
 import com.example.demofx.MainApplication;
-import com.example.demofx.dao.DAOhql;
+import com.example.demofx.dao.DAOUsersHql;
+import com.example.demofx.dao.DAOFactory;
 import com.example.demofx.global.UserHolder;
 import com.example.demofx.models.UsersEntity;
 import javafx.fxml.FXML;
@@ -25,7 +26,8 @@ public class LoginController {
     protected void onLoginButtonClick() throws IOException {
         String username = inputUsername.getText();
         String password = inputPassword.getText();
-        DAOhql dao = DAOhql.getInstance();
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        DAOUsersHql dao = daoFactory.getUsersDao();
         UsersEntity userDB = dao.getUserByUsername(username);
         if (userDB != null) {
             if (userDB.getPassword().equals(password)) {

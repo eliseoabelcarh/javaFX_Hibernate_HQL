@@ -1,7 +1,6 @@
 package com.example.demofx.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;

@@ -30,12 +30,12 @@ public class OrdersProductsEntity {
         this.id = id;
     }
 
-    public OrdersProductsEntity (OrdersEntity ordersByOrderId, ProductsEntity productsByProductId, Integer qty, Double price) {
+    public OrdersProductsEntity (OrdersEntity ordersByOrderId, ProductsEntity productsByProductId, Integer qty) {
         this.id = new OrdersProductsEntityPK(ordersByOrderId.getId(), productsByProductId.getId());
         this.ordersByOrderId = ordersByOrderId;
         this.productsByProductId = productsByProductId;
         this.qty = qty;
-        this.price = price;
+        this.price = qty * productsByProductId.getProductPrice();
     }
     public OrdersProductsEntity(OrdersProductsEntityPK id, Integer qty, Double price) {
         this.id = id;
