@@ -60,6 +60,11 @@ public class HomeController implements Initializable {
             Node Overview = FXMLLoader.load(Objects.requireNonNull(MainApplication.class.getResource("overview-view.fxml")));
             pnlOverview.getChildren().add(Overview);
             currentUsername.setText(UserHolder.getInstance().getUsername());
+
+            Node Products = FXMLLoader.load(Objects.requireNonNull(MainApplication.class.getResource("products-view.fxml")));
+            pnlOrders.getChildren().add(Products);
+
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
