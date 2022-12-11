@@ -36,4 +36,5 @@ public class OrdersEntity {
     public void setOrdersProductsById(Collection<OrdersProductsEntity> ordersProductsById) {
         this.ordersProductsById = ordersProductsById;
     }
+
 }

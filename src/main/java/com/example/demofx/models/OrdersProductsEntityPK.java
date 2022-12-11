@@ -72,14 +72,14 @@ public class OrdersProductsEntityPK implements Serializable {
         return Objects.hash(orderId, productId, uniqueId);
     }
 
-    @Override
-    public String toString() {
-        return "OrdersProductsEntityPK{" +
-                "orderId=" + orderId +
-                ", productId=" + productId +
-                ", uniqueId='" + uniqueId + '\'' +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "OrdersProductsEntityPK{" +
+//                "orderId=" + orderId +
+//                ", productId=" + productId +
+//                ", uniqueId='" + uniqueId + '\'' +
+//                '}';
+//    }
 
 
 

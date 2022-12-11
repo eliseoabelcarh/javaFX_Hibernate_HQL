@@ -83,16 +83,16 @@ public class OrdersProductsEntity {
         this.productsByProductId = productsByProductId;
     }
 
-    @Override
-    public String toString() {
-        return "OrdersProductsEntity{" +
-                "id=" + id +
-                ", qty=" + qty +
-                ", price=" + price +
-                ", ordersByOrderId=" + ordersByOrderId +
-                ", productsByProductId=" + productsByProductId +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "OrdersProductsEntity{" +
+//                "id=" + id +
+//                ", qty=" + qty +
+//                ", price=" + price +
+//                ", ordersByOrderId=" + ordersByOrderId +
+//                ", productsByProductId=" + productsByProductId +
+//                '}';
+//    }
 
 
 

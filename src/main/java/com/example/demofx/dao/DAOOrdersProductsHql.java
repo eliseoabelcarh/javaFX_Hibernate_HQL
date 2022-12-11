@@ -1,8 +1,12 @@
 package com.example.demofx.dao;
 
 import com.example.demofx.models.OrdersProductsEntity;
+import com.example.demofx.models.UsersEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+
+import java.util.List;
 
 public class DAOOrdersProductsHql {
     private static DAOOrdersProductsHql instance = null;
@@ -18,6 +22,20 @@ public class DAOOrdersProductsHql {
         System.out.println("Transaction committed");
         session.close();
     }
+
+    public static List<OrdersProductsEntity> getAllOrdersProducts() {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        System.out.println("Transaction started");
+        Query query = session.createQuery("FROM OrdersProductsEntity");
+        System.out.println("Query created");
+        List<OrdersProductsEntity> ordersProducts = query.list();
+        session.getTransaction().commit();
+        System.out.println("Transaction committed");
+        session.close();
+        return ordersProducts;
+    }
+
 
     public static void close() {
         System.out.println("Closing Session Factory");
