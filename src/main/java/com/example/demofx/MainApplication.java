@@ -105,27 +105,41 @@ public class MainApplication extends Application {
 //
 //        dao.close();
 
+        //Product 1
+        ProductsEntity  product1 = new ProductsEntity();
+        product1.setId(createRandomNumber());
+        product1.setProductName("Product".concat(String.valueOf(createRandomNumber())));
+        product1.setProductSku(String.valueOf(createRandomNumber()));
+        product1.setProductEpc(String.valueOf(createRandomNumber()));
+        product1.setProductPrice(150.0);
+
+        //Product 2
+        ProductsEntity  product2 = new ProductsEntity();
+        product2.setId(createRandomNumber());
+        product2.setProductName("Product".concat(String.valueOf(createRandomNumber())));
+        product2.setProductSku(String.valueOf(createRandomNumber()));
+        product2.setProductEpc(String.valueOf(createRandomNumber()));
+        product2.setProductPrice(200.0);
 
 
-        ProductsEntity  product = new ProductsEntity();
-        product.setId(createRandomNumber());
-        product.setProductName("Product".concat(String.valueOf(createRandomNumber())));
-        product.setProductSku(String.valueOf(createRandomNumber()));
-        product.setProductEpc(String.valueOf(createRandomNumber()));
-        product.setProductPrice(150.0);
-
+        //Saving products in DB
         DAOFactory daoFactory = DAOFactory.getInstance();
         DAOProductsHql daoProductsHql = daoFactory.getProductsDao();
-        daoProductsHql.addNewProduct(product);
+        daoProductsHql.addNewProduct(product1);
+        daoProductsHql.addNewProduct(product2);
 
+        //Init order
         OrdersEntity order = new OrdersEntity();
-        order.setId(createRandomNumber());
+        order.setId(createRandomNumber());//tested with 10
         DAOOrdersHql daoOrdersHql = daoFactory.getOrdersDao();
         daoOrdersHql.addNewOrder(order);
 
-        OrdersProductsEntity orderProduct = new OrdersProductsEntity(order, product,2);
+        //Add items to order
+        OrdersProductsEntity orderProduct1 = new OrdersProductsEntity(order, product1,2);
+        OrdersProductsEntity orderProduct2 = new OrdersProductsEntity(order, product2,3);
         DAOOrdersProductsHql daoOrdersProductsHql = daoFactory.getOrdersProductsDao();
-        daoOrdersProductsHql.addNewOrderProduct(orderProduct);
+        daoOrdersProductsHql.addNewOrderProduct(orderProduct1);
+        daoOrdersProductsHql.addNewOrderProduct(orderProduct2);
 
         launch();
     }

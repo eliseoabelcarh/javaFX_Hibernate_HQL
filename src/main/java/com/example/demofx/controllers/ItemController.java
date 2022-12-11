@@ -20,6 +20,9 @@ public class ItemController {
     @FXML
     private Label product_price;
 
+    @FXML
+    private Label subtotal;
+
     private OrdersProductsEntity item;
 
     public void setData(OrdersProductsEntity _item){
@@ -29,6 +32,7 @@ public class ItemController {
         product_sku.setText(item.getProductsByProductId().getProductSku());
         product_epc.setText(item.getProductsByProductId().getProductEpc());
         product_price.setText(item.getProductsByProductId().getProductPrice().toString());
+        subtotal.setText(item.getPrice().toString());
 
     }
 

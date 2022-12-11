@@ -73,7 +73,9 @@ public class OverviewController implements Initializable {
         search_icon.setOnMouseClicked(event -> {
             reset_search_btn.setVisible(true);
             String searched_text = search_field.getText();
-            showed_list = showed_list.stream().filter(o -> o.getId().getUniqueId().equals(searched_text)).collect(Collectors.toList());
+            //TODO validate search text and show error if NaN
+            int searchedOrderID = Integer.parseInt(searched_text);
+            showed_list = showed_list.stream().filter(o -> o.getId().getOrderId() == searchedOrderID).collect(Collectors.toList());
             loadItemsView(showed_list);
         });
     }
