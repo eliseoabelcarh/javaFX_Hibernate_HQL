@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 public class ItemController {
 
     @FXML
+    private Label product_qty;
+    @FXML
     private Label product_name;
 
     @FXML
@@ -22,6 +24,7 @@ public class ItemController {
 
     public void setData(OrdersProductsEntity _item){
         this.item = _item;
+        product_qty.setText(String.valueOf(item.getQty()));
         product_name.setText(item.getProductsByProductId().getProductName());
         product_sku.setText(item.getProductsByProductId().getProductSku());
         product_epc.setText(item.getProductsByProductId().getProductEpc());

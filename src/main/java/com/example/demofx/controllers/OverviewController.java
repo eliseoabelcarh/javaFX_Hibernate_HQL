@@ -38,38 +38,22 @@ public class OverviewController implements Initializable {
 
     @FXML
     private Button reset_search_btn;
+
+    @FXML
+    private Label order_price;
     @FXML
     private List<OrdersProductsEntity> showed_list;
 
     private List<OrdersProductsEntity> ordersProducts;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         reset_search_btn.setVisible(false);
 
-        //Get Data from DB
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        DAOOrdersProductsHql dao = daoFactory.getOrdersProductsDao();
-        ordersProducts = dao.getAllOrdersProducts();
-        System.out.println(ordersProducts.size());
-        showed_list = ordersProducts;
+        getDataFromDAO();
 
-        total_orders.setText(String.valueOf(ordersProducts.size()));
-
-        search_icon.setOnMouseClicked(event -> {
-            reset_search_btn.setVisible(true);
-            pnItems.getChildren().removeAll();
-            System.out.println("Search");
-            String searched_text = search_field.getText();
-            System.out.println(searched_text);
-
-            // filter showed_list by searched_text
-
-            showed_list = showed_list.stream()
-                    .filter(o -> o.getId().getUniqueId().equals(searched_text)).collect(Collectors.toList());
-            System.out.println("SearchEnd" + showed_list.size());
-            loadItemsView(showed_list);
-        });
+        loadActionEvents();
 
         loadItemsView(showed_list);
 
@@ -84,8 +68,27 @@ public class OverviewController implements Initializable {
         showed_list = ordersProducts;
         loadItemsView(showed_list);
     }
-    public void loadItemsView(List<OrdersProductsEntity> ordersProducts)  {
+
+    public void loadActionEvents() {
+        search_icon.setOnMouseClicked(event -> {
+            reset_search_btn.setVisible(true);
+            String searched_text = search_field.getText();
+            showed_list = showed_list.stream().filter(o -> o.getId().getUniqueId().equals(searched_text)).collect(Collectors.toList());
+            loadItemsView(showed_list);
+        });
+    }
+
+    public void getDataFromDAO() {
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        DAOOrdersProductsHql dao = daoFactory.getOrdersProductsDao();
+        ordersProducts = dao.getAllOrdersProducts();
+        total_orders.setText(String.valueOf(ordersProducts.size()));
+        showed_list = ordersProducts;
+    }
+
+    public void loadItemsView(List<OrdersProductsEntity> ordersProducts) {
         pnItems.getChildren().clear();
+        Double total_price = 0.0;
         for (OrdersProductsEntity item : ordersProducts) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(MainApplication.class.getResource("item-view.fxml"));
@@ -94,37 +97,11 @@ public class OverviewController implements Initializable {
                 ItemController itemController = fxmlLoader.getController();
                 itemController.setData(item);
                 pnItems.getChildren().add(node);
+                total_price += item.getPrice();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
-        //        //Add items list
-//        Node[] nodes = new Node[ordersProducts.size()];
-//        for (int i = 0; i < nodes.length; i++) {
-//            final int j = i;
-//            try {
-//
-//                FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("item-view.fxml"));
-//                nodes[i] = loader.load();
-//                ItemController itemController = loader.getController();
-//                String s =Integer.toString(i);
-//                OrdersProductsEntity orderProduct = ordersProducts.get(i);
-//                System.out.println(orderProduct);
-//                itemController.setData(orderProduct);
-//
-//
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//            //give the items some effect
-//            nodes[i].setOnMouseEntered(event -> {
-//                nodes[j].setStyle("-fx-background-color : #0A0E3F");
-//            });
-//            nodes[i].setOnMouseExited(event -> {
-//                nodes[j].setStyle("-fx-background-color : #02030A");
-//            });
-//            pnItems.getChildren().add(nodes[i]);
-//        }
+        order_price.setText(String.valueOf(total_price));
     }
 }
